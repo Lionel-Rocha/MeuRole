@@ -67,7 +67,7 @@ Mostra bares e restaurantes próximos ao local desejado, no raio escolhido.
 
 **3. Cinemas**
 
-*POST /cinemas*
+*POST /cinema*
 
 Mostra cinemas na área desejada, no raio escolhido.
 
@@ -87,5 +87,6 @@ Mostra cinemas na área desejada, no raio escolhido.
 ```
 
 ## TO-DO:
-- [ ] Vida noturna - bares e restaurantes
+- [x] Vida noturna - bares e restaurantes
+- [ ] Tratamento de erros nas rotas
 - [ ] Front-end
