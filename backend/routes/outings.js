@@ -1,11 +1,3 @@
-//askOuting
-//POST: /outing/
-//recebe: address, radius, duration
-
-//NOTAS:
-//cinema é part
-//part + part = whole
-//budget precisa ser considerado
 
 const express = require('express');
 const router = express.Router();

@@ -5,7 +5,7 @@ const geolocationUtils = require("../utils/geolocation");
 const {getCinemasNearAddress} = require("./cinemas");
 const geolocationUrl = "https://www.mapquestapi.com/geocoding/v1/address";
 
-//vamos fixar o valor do ingresso
+//vamos fixar o valor do ingresso para 35 reais. Ajustável.
 const cinemaPrice = 35;
 
 async function generatesOuting(address, radius, type, budget) {
@@ -49,34 +49,6 @@ async function generatesOuting(address, radius, type, budget) {
             }
         }
 
-        // ❌ não adicionamos 2 cinemas em nenhum momento
-
-        suggestions.sort((a, b) => {
-            const [p1a, p2a] = a.combo;
-            const [p1b, p2b] = b.combo;
-
-            const distA = geolocationUtils.distance(p1a, p2a);
-            const distB = geolocationUtils.distance(p1b, p2b);
-
-            if (distA !== distB) {
-                return distA - distB; // menor distância primeiro
-            }
-
-            if (a.totalCost !== b.totalCost) {
-                return a.totalCost - b.totalCost; // menor custo depois
-            }
-
-            const ratingA = (p1a.rating || 0) + (p2a.rating || 0);
-            const ratingB = (p1b.rating || 0) + (p2b.rating || 0);
-
-            return ratingB - ratingA; // maior rating por último
-        });
-
-
-
-
-
-
         return suggestions || { message: "Nenhum passeio válido encontrado dentro do orçamento." };
     }
 
@@ -91,7 +63,7 @@ async function getPointsNearAddress(address, radius){
 
     let addressCoordinates = await axios.post(geolocationUrl, {
         key: process.env.MAPQUEST_KEY,
-        location: address
+        location: address + " - Rio de Janeiro"
     });
 
     addressCoordinates = addressCoordinates.data.results[0].locations[0].latLng;
