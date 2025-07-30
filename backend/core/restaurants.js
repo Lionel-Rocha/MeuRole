@@ -6,27 +6,33 @@ const geolocationUrl = "https://www.mapquestapi.com/geocoding/v1/address";
 
 async function getRestaurantsNearAddress(address, radius){
 
-    const allRestaurants = await restaurantsdb.getAllRestaurants();
+    try{
+        const allRestaurants = await restaurantsdb.getAllRestaurants();
 
 
-    let relevantRestaurants = [];
+        let relevantRestaurants = [];
 
-    let addressCoordinates = await axios.post(geolocationUrl, {
-        key: process.env.MAPQUEST_KEY,
-        location: address
-    });
+        let addressCoordinates = await axios.post(geolocationUrl, {
+            key: process.env.MAPQUEST_KEY,
+            location: address + " - Rio de Janeiro"
+        });
 
-    addressCoordinates = addressCoordinates.data.results[0].locations[0].latLng;
+        addressCoordinates = addressCoordinates.data.results[0].locations[0].latLng;
 
 
-    for (let i = 0; i < allRestaurants.length; i++){
-        let distance = geolocationUtils.distance(allRestaurants[i].latitude, allRestaurants[i].longitude, addressCoordinates.lat, addressCoordinates.lng)
+        for (let i = 0; i < allRestaurants.length; i++){
+            let distance = geolocationUtils.distance(allRestaurants[i].latitude, allRestaurants[i].longitude, addressCoordinates.lat, addressCoordinates.lng)
 
-        if (distance <= radius){
-            relevantRestaurants.push(allRestaurants[i]);
+            if (distance <= radius){
+                relevantRestaurants.push(allRestaurants[i]);
+            }
         }
+        return relevantRestaurants;
+    } catch (e){
+        throw new Error("Houve um erro ao buscar restaurantes próximos: " + e.message);
     }
-    return relevantRestaurants;
+
+
 }
 
 module.exports = {

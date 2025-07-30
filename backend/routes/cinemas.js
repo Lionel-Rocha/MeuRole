@@ -6,8 +6,19 @@ const cinemacore = require("../core/cinemas");
 
 router.post("/", async(req, res) =>{
    const {address, radius} = req.body;
-   let relevantCinemas = await cinemacore.getCinemasNearAddress(address, radius);
-   res.status(200).send(relevantCinemas);
+
+   if (!address || !radius) {
+      return res.status(400).send({message: "Endereço e raio são obrigatórios"});
+   }
+
+   try{
+      let relevantCinemas = await cinemacore.getCinemasNearAddress(address, radius);
+      res.status(200).send(relevantCinemas);
+   } catch (e) {
+      res.status(500).send({message: e});
+   }
+
+
 });
 
 module.exports = router;
