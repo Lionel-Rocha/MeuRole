@@ -1,5 +1,5 @@
-# Meu Rolê Carioca
-Chega de pensar muito para sair! Esse serviço (API/aplicação web) planeja seus rolês dentro de um orçamento nas proximidades de um local que você desejar.
+# Meu Rolé Carioca
+Chega de pensar muito para sair! Esse serviço (API/aplicação web) planeja seus rolés dentro de um orçamento nas proximidades de um local que você desejar.
 
 ⚠️ **ATENÇÃO!** Válido apenas para a **cidade** do Rio de Janeiro (ao menos por enquanto!)
 
