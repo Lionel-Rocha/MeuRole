@@ -71,21 +71,22 @@ function handleClick() {
   const address = (document.getElementById('address') as HTMLInputElement).value;
   const radius = (document.getElementById('radius') as HTMLInputElement).value;
   const duration = (document.getElementById('duration') as HTMLInputElement).checked;
-  const budget = (document.getElementById('budget') as HTMLInputElement).value;
+  let budget = (document.getElementById('budget') as HTMLInputElement).value;
 
   let durationText = duration ? 'whole' : 'part';
 
-  console.log(`Address: ${address}, Radius: ${radius}, Duration: ${duration}, Budget: ${budget}`);
 
   if (address && radius && budget) {
-    sendForm(address, radius, durationText, budget);
+    let radiusNum = parseInt(radius);
+    let budgetNum = parseFloat(budget);
+    sendForm(address, radiusNum, durationText, budgetNum);
   } else {
     alert('Por favor, preencha todos os campos obrigatórios.');
   }
 
 }
 
-async function sendForm(address, radius, duration, budget){
+async function sendForm(address:string, radius:number, duration:string, budget:number){
   const data = {
     address: address, radius: radius, type: duration, budget: budget
   }
