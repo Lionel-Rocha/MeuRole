@@ -1,0 +1,14 @@
+{
+  "name": "MeuRole",
+  "version": "1.0.0",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.52.1",
+    "axios": "^1.11.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "mongodb": "^6.18.0",
+    "postgres": "^3.4.7",
+    "vue": "^3.5.18"
+  }
+}
