@@ -7,17 +7,18 @@ Chega de pensar muito para sair! Esse serviço (API/aplicação web) planeja seu
 
 <img src="https://img.shields.io/badge/Node.js-5FA04E?style=flat&logo=nodedotjs&logoColor=fff">
 <img src="https://img.shields.io/badge/Vue.js-4FC08D?style=flat&logo=vuedotjs&logoColor=fff">
+<img src="https://img.shields.io/badge/Ionic-%233880FF?style=flat&logo=ionic&logoColor=white">
 
 </div>
 
 ## URLs
 
-**API**: 
+**API**: https://meurolecarioca.onrender.com
 
 **SITE**:
 
 ## Como funciona
-É possível "calcular" os rolês por três categorias:
+É possível "calcular" os rolés por três categorias:
 
 **1. Passeios**
 
