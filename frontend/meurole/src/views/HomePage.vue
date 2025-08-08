@@ -64,8 +64,17 @@
 
 <script setup lang="ts">
 
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
+import {
+  IonContent, IonHeader, IonPage, IonTitle, IonToolbar,
+  IonButton, IonList, IonItem, IonInput, IonRange, IonCheckbox
+} from '@ionic/vue';
 import router from "@/router";
+
+const components = {
+  IonContent, IonHeader, IonPage, IonTitle, IonToolbar,
+  IonButton, IonList, IonItem, IonInput, IonRange, IonCheckbox
+}
+
 
 function handleClick() {
   const address = (document.getElementById('address') as HTMLInputElement).value;
