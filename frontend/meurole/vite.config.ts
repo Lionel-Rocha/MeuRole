@@ -17,7 +17,7 @@ export default defineConfig({
     },
 
   },
-  base: '/home',
+  base: '/',
   test: {
     globals: true,
     environment: 'jsdom'
