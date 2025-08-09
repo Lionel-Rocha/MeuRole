@@ -17,13 +17,15 @@
         <div id="container">
           <strong>Qual vai ser seu próximo rolé?</strong>
           <br>
-          <ion-button>surpreenda-me</ion-button>
+          <ion-button :disabled="true">surpreenda-me</ion-button>
+          <ion-button @click="redirectToRestaurants">restaurantes</ion-button>
+          <ion-button>vida noturna</ion-button>
           <br>
-          <p>OU</p>
+          <p style="padding-top: 1em">OU DESCUBRA UM ROLÉ NAS PROXIMIDADES</p>
 
           <ion-list :inset="true">
             <ion-item>
-              <ion-input id="address" label="bairro ou endereço" :clear-input="true" color="dark"></ion-input>
+              <ion-input id="address" placeholder="bairro/endereço" :clear-input="true" color="dark"></ion-input>
             </ion-item>
             <ion-item>
 
@@ -46,7 +48,7 @@
             </ion-item>
             <br>
             <ion-item>
-              <ion-input id="budget" type="number" label="orçamento" color="dark"></ion-input>
+              <ion-input id="budget" type="number" placeholder="orçamento" color="dark"></ion-input>
             </ion-item>
 
           </ion-list>
@@ -75,6 +77,9 @@ const components = {
   IonButton, IonList, IonItem, IonInput, IonRange, IonCheckbox
 }
 
+function redirectToRestaurants(){
+  router.push('/restaurants');
+}
 
 function handleClick() {
   const address = (document.getElementById('address') as HTMLInputElement).value;

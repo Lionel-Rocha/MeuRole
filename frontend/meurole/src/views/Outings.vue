@@ -2,7 +2,7 @@
 import { ref, onMounted, watch } from 'vue'
 import {
   IonContent, IonHeader, IonPage, IonTitle, IonToolbar,
-  IonCard, IonCardTitle, IonCardSubtitle, IonButton
+  IonCard, IonCardTitle, IonCardSubtitle, IonButton, IonModal
 } from '@ionic/vue'
 import router from "@/router";
 
@@ -64,11 +64,11 @@ function sortOutingsByDistance() {
 function openModal(outing: any) {
   selectedOuting.value = outing
   console.log(modal.value);
-  modal.value.present()
+  modal.value.$el.present()
 }
 
 function closeModal() {
-  modal.value.dismiss()
+  modal.value.$el.dismiss()
 }
 onMounted(() => {
   const stored = localStorage.getItem('outings')
@@ -171,6 +171,10 @@ ion-modal ion-content{
 
 ion-modal ion-toolbar{
   --background:  #008000;
+  --color: #fff;
+}
+
+ion-modal ion-toolbar ion-button{
   --color: #fff;
 }
 
