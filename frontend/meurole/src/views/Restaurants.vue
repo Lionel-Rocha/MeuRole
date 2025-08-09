@@ -105,7 +105,7 @@ async function getRestaurants() {
     const res = await fetch("https://meurolecarioca.onrender.com/restaurants/rating");
     const data = await res.json();
     restaurants.value = data;
-    filteredRestaurants.value = data.filter(r => r.rating >= 4.6);
+    filteredRestaurants.value = data.filter((r: { rating: number }) => r.rating >= 4.6);
   } catch (err) {
     console.error("Erro ao buscar restaurantes:", err);
   } finally {
