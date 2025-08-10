@@ -18,7 +18,21 @@ Chega de pensar muito para sair! Esse serviço (API/aplicação web) planeja seu
 
 **SITE**: https://meu-role.vercel.app
 
-## Como funciona
+## Atualizações futuras
+
+- [ ] Front-end: modal de informações sobre os restaurantes recomendados
+- [ ] Front-end: página de busca de bares (vida noturna)
+- [ ] Front-end: restaurantes junto à recomendação de rolé de duração parcial/dia inteiro
+
+### v0.2
+
+- [ ] Banco de dados: adicionar instagram dos restaurantes
+- [ ] Banco de dados: adicionar foto dos pontos turísticos
+- [ ] Back-end: refletir mudanças
+- [ ] Front-end: refletir mudanças
+
+
+## Como funciona (API)
 É possível "calcular" os rolés por três categorias:
 
 **1. Passeios**
