@@ -19,16 +19,16 @@
 
           <ion-text color="dark"><h1>Restaurantes por categoria</h1></ion-text>
 
-          <ion-button><img src="../../public/brazilian.png" alt="comida brasileira"/></ion-button>
-          <ion-button><img src="../../public/vegan.png" alt="comida vegana"/></ion-button>
-          <ion-button><img src="../../public/asian.png" alt="comida asiática"/></ion-button>
-          <ion-button><img src="../../public/italian.png" alt="comida italiana"/></ion-button>
+          <ion-button @click="redirect('brazilian')"><img src="/brazilian.png" alt="comida brasileira"/></ion-button>
+          <ion-button @click="redirect('vegan')"><img src="/vegan.png" alt="comida vegana"/></ion-button>
+          <ion-button @click="redirect('asian')"><img src="/asian.png" alt="comida asiática"/></ion-button>
+          <ion-button @click="redirect('italian')"><img src="/italian.png" alt="comida italiana"/></ion-button>
 
           <br>
 
-          <ion-button><img src="../../public/pizza.png" alt="pizza"/></ion-button>
-          <ion-button><img src="../../public/hamburguer.png" alt="hambúrguer"/></ion-button>
-          <ion-button><img src="../../public/other.png" alt="outras categorias"/></ion-button>
+          <ion-button @click="redirect('pizza')"><img src="/pizza.png" alt="pizza"/></ion-button>
+          <ion-button @click="redirect('hamburguer')"><img src="/hamburguer.png" alt="hambúrguer"/></ion-button>
+          <ion-button @click="redirect('other')"><img src="/other.png" alt="outras categorias"/></ion-button>
 
 
 
@@ -53,7 +53,7 @@
             </ion-item>
 
             <br>
-            <ion-button>
+            <ion-button @click="searchRestaurants">
               Buscar restaurantes
             </ion-button>
           </ion-list>
@@ -99,7 +99,7 @@ const carouselConfig = {
 const restaurants = ref<any[]>([]);
 const filteredRestaurants = ref<any[]>([]);
 const loading = ref(true);
-
+const restType = ref();
 async function getRestaurants() {
   try {
     const res = await fetch("https://meurolecarioca.onrender.com/restaurants/rating");
@@ -111,6 +111,54 @@ async function getRestaurants() {
   } finally {
     loading.value = false;
   }
+}
+
+function searchRestaurants() {
+  const address = (document.getElementById('address') as HTMLInputElement).value;
+  const radius = (document.getElementById('radius') as HTMLInputElement).value;
+
+  if (address && radius) {
+    let radiusNum = parseInt(radius);
+
+    // Mostra o loading enquanto busca
+    loading.value = true;
+
+    sendForm(address, radiusNum);
+  }
+}
+
+async function sendForm(address:string, radius:number){
+  const data = {
+    address: address, radius: radius
+  }
+  try {
+    let response = await fetch('https://meurolecarioca.onrender.com/restaurants', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+
+    if (!response.ok) {
+      alert('Erro ao enviar o formulário. Por favor, tente novamente.');
+      return;
+    }
+
+    localStorage.setItem('restaurants', JSON.stringify(await response.json()));
+    await router.push('/restaurantsNearby');
+
+  } catch (err) {
+    console.error("Erro na busca:", err);
+    alert('Erro ao buscar restaurantes.');
+  } finally {
+    // Sempre esconde o loading no final
+    loading.value = false;
+  }
+}
+
+async function redirect(value:string){
+  restType.value = value;
+  await router.push(`/restaurantsType/${restType.value}`);
+  location.reload(); //gambiarra descarada
 }
 
 onMounted(() => {

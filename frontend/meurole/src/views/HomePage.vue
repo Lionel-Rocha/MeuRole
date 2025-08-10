@@ -121,14 +121,6 @@ async function sendForm(address:string, radius:number, duration:string, budget:n
   await router.push('/outings');
 }
 
-//Sei que não é exatamente certo, mas vou deixar aqui a responsabilidade.
-async function keepAlive(){
-  await fetch('https://meurolecarioca.onrender.com/outings')
-      .then(response => console.log('Keep alive ping sent'))
-      .catch(error => console.error('Error in keep alive ping:', error));
-}
-
-setTimeout(keepAlive, 5 * 60 * 1000); // 5 minutes
 
 </script>
 

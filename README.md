@@ -1,13 +1,14 @@
 # Meu Rolé Carioca
 Chega de pensar muito para sair! Esse serviço (API/aplicação web) planeja seus rolés dentro de um orçamento nas proximidades de um local que você desejar.
 
-⚠️ **ATENÇÃO!** Válido apenas para a **cidade** do Rio de Janeiro (ao menos por enquanto!)
+⚠️ **ATENÇÃO!** Válido apenas para a **cidade** do Rio de Janeiro.
 
 <div align="center">
 
 <img src="https://img.shields.io/badge/Node.js-5FA04E?style=flat&logo=nodedotjs&logoColor=fff">
 <img src="https://img.shields.io/badge/Vue.js-4FC08D?style=flat&logo=vuedotjs&logoColor=fff">
 <img src="https://img.shields.io/badge/Ionic-%233880FF?style=flat&logo=ionic&logoColor=white">
+<img src="https://img.shields.io/badge/Typescript-3d85c6?style=flat&logo=typescript&logoColor=white">
 
 </div>
 
@@ -15,7 +16,7 @@ Chega de pensar muito para sair! Esse serviço (API/aplicação web) planeja seu
 
 **API**: https://meurolecarioca.onrender.com
 
-**SITE**:
+**SITE**: https://meu-role.vercel.app
 
 ## Como funciona
 É possível "calcular" os rolés por três categorias:
@@ -49,7 +50,7 @@ Recebe opções de passeio no raio desejado no local central exigido.
 
 *POST /restaurants*
 
-Mostra bares e restaurantes próximos ao local desejado, no raio escolhido. 
+Mostra bares e restaurantes próximos ao local desejado, no raio escolhido.
 
 ```
 {
@@ -86,8 +87,3 @@ Mostra cinemas na área desejada, no raio escolhido.
 "radius":7,
 }
 ```
-
-## TO-DO:
-- [x] Vida noturna - bares e restaurantes
-- [ ] Tratamento de erros nas rotas
-- [ ] Front-end

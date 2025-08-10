@@ -3,6 +3,8 @@ import { RouteRecordRaw } from 'vue-router';
 import HomePage from '../views/HomePage.vue'
 import Outings from "../views/Outings.vue";
 import Restaurants from "../views/Restaurants.vue";
+import RestaurantsNearby from "../views/RestaurantsNearby.vue";
+import RestaurantsType from "../views/RestaurantsType.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -18,6 +20,16 @@ const routes: Array<RouteRecordRaw> = [
     path:'/restaurants',
     name:'Restaurants',
     component: Restaurants
+  },
+  {
+    path:'/restaurantsNearby',
+    name:'Restaurants Nearby',
+    component: RestaurantsNearby
+  },
+  {
+    path:"/restaurantsType/:type",
+    name:"Restaurants Type",
+    component: RestaurantsType
   }
 ]
 

@@ -52,18 +52,15 @@ function sortByDistance(items: any[]) {
 
 // Funções que atualizam sortedOutings
 function sortOutingsByPrice() {
-  sortedOutings.value = sortByPrice(outings.value)
-  console.log('Ordenado por preço:', sortedOutings.value)
+  sortedOutings.value = sortByPrice(outings.value);
 }
 
 function sortOutingsByDistance() {
-  sortedOutings.value = sortByDistance(outings.value)
-  console.log('Ordenado por distância:', sortedOutings.value)
+  sortedOutings.value = sortByDistance(outings.value);
 }
 
 function openModal(outing: any) {
   selectedOuting.value = outing
-  console.log(modal.value);
   modal.value.$el.present()
 }
 
