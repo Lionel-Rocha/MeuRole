@@ -1,6 +1,14 @@
 <template>
   <ion-page>
 
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button @click="router.back()">Voltar</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+
     <ion-content :fullscreen="true">
       <!-- Spinner de carregamento -->
       <ion-loading
@@ -66,6 +74,7 @@
                 <ion-card-header>
                   <ion-card-subtitle>{{ rest.name }}</ion-card-subtitle>
                   <ion-card-content>Nota: {{ rest.rating }}</ion-card-content>
+                  <ion-button @click="openModal(rest)">Ver mais</ion-button>
                 </ion-card-header>
               </ion-card>
             </Slide>
@@ -73,9 +82,27 @@
 
         </div>
       </div>
+
+
+      <ion-modal ref="modal">
+        <ion-header>
+          <ion-toolbar>
+            <ion-buttons slot="start">
+              <ion-button @click="closeModal">Fechar</ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+          <div v-if="selectedRestaurant">
+            <h2>{{ selectedRestaurant.name }}</h2>
+            <p><strong>Endereço:</strong> {{ selectedRestaurant.address }}</p>
+            <p><strong>Tipo:</strong> {{ selectedRestaurant.type }}</p>
+          </div>
+        </ion-content>
+      </ion-modal>
     </ion-content>
 
-    <ion-button @click="router.back()">Voltar</ion-button>
+<!--    <ion-button @click="router.back()">Voltar</ion-button>-->
 
   </ion-page>
 </template>
@@ -83,15 +110,15 @@
 <script setup lang="ts">
 import {
   IonContent, IonHeader, IonPage, IonTitle, IonToolbar,
-  IonButton, IonList, IonItem, IonInput, IonRange, IonCheckbox, IonLoading
+  IonButton, IonList, IonItem, IonInput, IonRange, IonCheckbox, IonLoading, IonButtons, IonModal
 } from '@ionic/vue';
 import router from "@/router";
 import {onMounted, ref} from "vue";
 import 'vue3-carousel/carousel.css';
 import { Carousel, Slide } from 'vue3-carousel';
-
+const selectedRestaurant = ref<any>(null);
 const carouselConfig = {
-  itemsToShow: 2.5,
+  itemsToShow: 1.5,
   wrapAround: true,
   autoplay: 3000
 }
@@ -100,6 +127,7 @@ const restaurants = ref<any[]>([]);
 const filteredRestaurants = ref<any[]>([]);
 const loading = ref(true);
 const restType = ref();
+const modal = ref();
 async function getRestaurants() {
   try {
     const res = await fetch("https://meurolecarioca.onrender.com/restaurants/rating");
@@ -110,7 +138,9 @@ async function getRestaurants() {
     console.error("Erro ao buscar restaurantes:", err);
   } finally {
     loading.value = false;
+
   }
+  return filteredRestaurants;
 }
 
 function searchRestaurants() {
@@ -161,9 +191,32 @@ async function redirect(value:string){
   location.reload(); //gambiarra descarada
 }
 
-onMounted(() => {
-  getRestaurants();
+function translateType(parsedRestaurants: any) {
+  for (let i = 0; i < parsedRestaurants.length; i++) {
+    if (parsedRestaurants[i].type === "brazilian") parsedRestaurants[i].type = "brasileira";
+    else if (parsedRestaurants[i].type === "italian") parsedRestaurants[i].type = "italiana";
+    else if (parsedRestaurants[i].type === "asian") parsedRestaurants[i].type = "asiática";
+    else if (parsedRestaurants[i].type === "vegan") parsedRestaurants[i].type = "vegana";
+    else if (parsedRestaurants[i].type === "other") parsedRestaurants[i].type = "outros";
+    else if (parsedRestaurants[i].type === "hamburguer") parsedRestaurants[i].type = "hambúrguer";
+  }
+}
+
+function openModal(restaurant: any) {
+  selectedRestaurant.value = restaurant;
+  modal.value.$el.present();
+}
+
+function closeModal() {
+  modal.value.$el.dismiss();
+}
+
+onMounted(async () => {
+  await getRestaurants();           // espera carregar
+  translateType(restaurants.value); // traduz agora que os dados existem
+  filteredRestaurants.value = restaurants.value;
 });
+
 </script>
 
 

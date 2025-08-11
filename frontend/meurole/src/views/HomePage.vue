@@ -19,7 +19,7 @@
           <br>
           <ion-button :disabled="true">surpreenda-me</ion-button>
           <ion-button @click="redirectToRestaurants">restaurantes</ion-button>
-          <ion-button>vida noturna</ion-button>
+          <ion-button :disabled="true">vida noturna</ion-button>
           <br>
           <p style="padding-top: 1em">OU DESCUBRA UM ROLÉ NAS PROXIMIDADES</p>
 
@@ -57,7 +57,11 @@
         </div>
       </div>
 
-
+      <ion-loading
+          :is-open="loading"
+          message="Carregando..."
+          spinner="crescent"
+      />
 
     </ion-content>
 
@@ -65,17 +69,15 @@
 </template>
 
 <script setup lang="ts">
-
 import {
   IonContent, IonHeader, IonPage, IonTitle, IonToolbar,
-  IonButton, IonList, IonItem, IonInput, IonRange, IonCheckbox
+  IonButton, IonList, IonItem, IonInput, IonRange, IonCheckbox,
+  IonLoading
 } from '@ionic/vue';
+import { ref } from 'vue';
 import router from "@/router";
 
-const components = {
-  IonContent, IonHeader, IonPage, IonTitle, IonToolbar,
-  IonButton, IonList, IonItem, IonInput, IonRange, IonCheckbox
-}
+const loading = ref(false); // controla o spinner
 
 function redirectToRestaurants(){
   router.push('/restaurants');
@@ -89,7 +91,6 @@ function handleClick() {
 
   let durationText = duration ? 'whole' : 'part';
 
-
   if (address && radius && budget) {
     let radiusNum = parseInt(radius);
     let budgetNum = parseFloat(budget);
@@ -97,31 +98,37 @@ function handleClick() {
   } else {
     alert('Por favor, preencha todos os campos obrigatórios.');
   }
-
 }
 
 async function sendForm(address:string, radius:number, duration:string, budget:number){
-  const data = {
-    address: address, radius: radius, type: duration, budget: budget
-  }
+  loading.value = true; // ativa loading
 
-  let response = await fetch('https://meurolecarioca.onrender.com/outings', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)
-  });
-  if (!response.ok) {
-    //PLACEHOLDER
-    alert('Erro ao enviar o formulário. Por favor, tente novamente.');
-    return;
+  try {
+    const data = { address, radius, type: duration, budget };
+
+    let response = await fetch('https://meurolecarioca.onrender.com/outings', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+
+    if (!response.ok) {
+      alert('Erro ao enviar o formulário. Por favor, tente novamente.');
+      return;
+    }
+
+    localStorage.setItem('outings', JSON.stringify(await response.json()));
+    await router.push('/outings');
+
+  } catch (err) {
+    console.error(err);
+    alert('Erro inesperado.');
+  } finally {
+    loading.value = false; // desativa loading
   }
-  localStorage.setItem('outings', JSON.stringify(await response.json()));
-  await router.push('/outings');
 }
-
-
 </script>
 
 <style scoped>

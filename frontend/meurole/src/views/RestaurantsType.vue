@@ -80,17 +80,13 @@ const displayedRestaurants = computed(() => {
   return [...restaurants.value];
 });
 
-// abrir modal
 function openModal(rest: any) {
   selectedRestaurant.value = rest;
-  // present modal - suporte para diferentes ref shapes
   const el = modalRef.value;
   if (!el) return;
-  // ionic modal has present on component or on inner $el
   (el.present ? el.present() : (el.$el && el.$el.present ? el.$el.present() : null));
 }
 
-// fechar modal
 function closeModal() {
   const el = modalRef.value;
   if (!el) return;
@@ -150,7 +146,7 @@ onMounted(() => {
         </template>
 
         <div v-else class="empty-message">
-          Nenhum restaurante encontrado para esta categoria.
+
         </div>
       </div>
 
