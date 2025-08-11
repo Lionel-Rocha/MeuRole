@@ -5,6 +5,7 @@ import Outings from "../views/Outings.vue";
 import Restaurants from "../views/Restaurants.vue";
 import RestaurantsNearby from "../views/RestaurantsNearby.vue";
 import RestaurantsType from "../views/RestaurantsType.vue";
+import Nightlife from "../views/Nightlife.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -30,6 +31,11 @@ const routes: Array<RouteRecordRaw> = [
     path:"/restaurantsType/:type",
     name:"Restaurants Type",
     component: RestaurantsType
+  },
+  {
+    path:"/nightlife",
+    name:"Night life",
+    component: Nightlife
   }
 ]
 

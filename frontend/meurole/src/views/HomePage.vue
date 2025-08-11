@@ -19,7 +19,7 @@
           <br>
           <ion-button :disabled="true">surpreenda-me</ion-button>
           <ion-button @click="redirectToRestaurants">restaurantes</ion-button>
-          <ion-button :disabled="true">vida noturna</ion-button>
+          <ion-button @click="redirectToNightlife">vida noturna</ion-button>
           <br>
           <p style="padding-top: 1em">OU DESCUBRA UM ROLÉ NAS PROXIMIDADES</p>
 
@@ -81,6 +81,10 @@ const loading = ref(false); // controla o spinner
 
 function redirectToRestaurants(){
   router.push('/restaurants');
+}
+
+function redirectToNightlife(){
+  router.push('/nightlife');
 }
 
 function handleClick() {

@@ -102,8 +102,6 @@
       </ion-modal>
     </ion-content>
 
-<!--    <ion-button @click="router.back()">Voltar</ion-button>-->
-
   </ion-page>
 </template>
 

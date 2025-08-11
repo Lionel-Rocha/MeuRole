@@ -20,7 +20,7 @@ Chega de pensar muito para sair! Esse serviço (API/aplicação web) planeja seu
 
 ## Atualizações futuras
 
-- [ ] Front-end: modal de informações sobre os restaurantes recomendados
+- [x] Front-end: modal de informações sobre os restaurantes recomendados
 - [ ] Front-end: página de busca de bares (vida noturna)
 - [ ] Front-end: restaurantes junto à recomendação de rolé de duração parcial/dia inteiro
 
@@ -30,6 +30,7 @@ Chega de pensar muito para sair! Esse serviço (API/aplicação web) planeja seu
 - [ ] Banco de dados: adicionar foto dos pontos turísticos
 - [ ] Back-end: refletir mudanças
 - [ ] Front-end: refletir mudanças
+- [ ] Front-end: restaurantes - cards de recomendados menores (para computador)
 
 
 ## Como funciona (API)
