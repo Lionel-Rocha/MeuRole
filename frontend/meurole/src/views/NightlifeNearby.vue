@@ -15,10 +15,10 @@ import {
 } from "@ionic/vue";
 import router from "@/router";
 
-const restaurants = ref<any[]>([]);
-const sortedRestaurants = ref<any[]>([]);
+const pubs = ref<any[]>([]);
+const sortedPubs = ref<any[]>([]);
 const modal = ref();
-const selectedRestaurant = ref<any>(null);
+const selectedPub = ref<any>(null);
 const isLoading = ref(true); // ESTADO DE LOADING
 
 function sortByRating(items: any[]) {
@@ -29,19 +29,11 @@ function sortByRating(items: any[]) {
   });
 }
 
-function translateType(parsedRestaurants: any) {
-  for (let i = 0; i < parsedRestaurants.length; i++) {
-    if (parsedRestaurants[i].type === "brazilian") parsedRestaurants[i].type = "brasileira";
-    else if (parsedRestaurants[i].type === "italian") parsedRestaurants[i].type = "italiana";
-    else if (parsedRestaurants[i].type === "asian") parsedRestaurants[i].type = "asiática";
-    else if (parsedRestaurants[i].type === "vegan") parsedRestaurants[i].type = "vegana";
-    else if (parsedRestaurants[i].type === "other") parsedRestaurants[i].type = "outros";
-    else if (parsedRestaurants[i].type === "hamburguer") parsedRestaurants[i].type = "hambúrguer";
-  }
+function sortPubsByDistance() {
+  sortedPubs.value = sortByDistance(pubs.value);
 }
-
-function openModal(restaurant: any) {
-  selectedRestaurant.value = restaurant;
+function openModal(pub: any) {
+  selectedPub.value = pub;
   modal.value.$el.present();
 }
 
@@ -80,22 +72,20 @@ function sortByDistance(items: any[]) {
 }
 
 function sortRestaurantsByRating() {
-  sortedRestaurants.value = sortByRating(restaurants.value);
+  sortedPubs.value = sortByRating(pubs.value);
 }
 
 function sortRestaurantsByDistance() {
-  sortedRestaurants.value = sortByDistance(restaurants.value);
-  console.log(sortedRestaurants);
+  sortedPubs.value = sortByDistance(pubs.value);
 }
 
 onMounted(() => {
-  const storedRestaurants = localStorage.getItem('restaurants');
-  if (storedRestaurants) {
-    const parsedRestaurants = JSON.parse(storedRestaurants);
-    translateType(parsedRestaurants);
-    restaurants.value = parsedRestaurants;
+  const storedPubs = localStorage.getItem('pubs');
+  if (storedPubs) {
+    const parsedPubs = JSON.parse(storedPubs);
+    pubs.value = parsedPubs;
   }
-  sortRestaurantsByDistance();
+  sortPubsByDistance();
   isLoading.value = false; // FINALIZA O LOADING
 });
 </script>
@@ -118,13 +108,13 @@ onMounted(() => {
 
     <ion-content :fullscreen="true" class="ion-padding">
       <div id="container" v-if="!isLoading">
-        <template v-if="sortedRestaurants.length">
-          <ion-card v-for="(restaurant, index) in sortedRestaurants" :key="index">
-            <ion-card-title>{{ restaurant.name }}</ion-card-title>
+        <template v-if="sortedPubs.length">
+          <ion-card v-for="(pub, index) in sortedPubs" :key="index">
+            <ion-card-title>{{ pub.name }}</ion-card-title>
             <ion-card-subtitle>
-              Total: {{ restaurant.rating.toFixed(1) }}
+              Total: {{ pub.rating.toFixed(1) }}
             </ion-card-subtitle>
-            <ion-button @click="openModal(restaurant)">Ver mais</ion-button>
+            <ion-button @click="openModal(pub)">Ver mais</ion-button>
           </ion-card>
         </template>
 
@@ -142,10 +132,10 @@ onMounted(() => {
           </ion-toolbar>
         </ion-header>
         <ion-content class="ion-padding">
-          <div v-if="selectedRestaurant">
-            <h2>{{ selectedRestaurant.name }}</h2>
-            <p><strong>Endereço:</strong> {{ selectedRestaurant.address }}</p>
-            <p><strong>Tipo:</strong> {{ selectedRestaurant.type }}</p>
+          <div v-if="selectedPub">
+            <h2>{{ selectedPub.name }}</h2>
+            <p><strong>Endereço:</strong> {{ selectedPub.address }}</p>
+            <p><strong>Tipo:</strong> {{ selectedPub.type }}</p>
           </div>
         </ion-content>
       </ion-modal>

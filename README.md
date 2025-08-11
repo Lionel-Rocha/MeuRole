@@ -21,8 +21,9 @@ Chega de pensar muito para sair! Esse serviço (API/aplicação web) planeja seu
 ## Atualizações futuras
 
 - [x] Front-end: modal de informações sobre os restaurantes recomendados
-- [ ] Front-end: página de busca de bares (vida noturna)
+- [x] Front-end: página de busca de bares (vida noturna)
 - [ ] Front-end: restaurantes junto à recomendação de rolé de duração parcial/dia inteiro
+- [ ] Função Surpreenda-me
 
 ### v0.2
 

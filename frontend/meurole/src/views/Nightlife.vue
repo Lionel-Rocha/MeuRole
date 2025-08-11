@@ -1,12 +1,24 @@
 <script setup lang="ts">
 import {
-  IonContent, IonHeader, IonPage, IonTitle, IonToolbar,
-  IonButton, IonList, IonItem, IonInput, IonRange, IonCheckbox, IonLoading, IonButtons, IonModal
+  IonButton,
+  IonButtons,
+  IonCheckbox,
+  IonContent,
+  IonHeader,
+  IonInput,
+  IonItem,
+  IonList,
+  IonLoading,
+  IonModal,
+  IonPage,
+  IonRange,
+  IonToolbar
 } from '@ionic/vue';
 import router from "@/router";
 import {onMounted, ref} from "vue";
 import 'vue3-carousel/carousel.css';
-import { Carousel, Slide } from 'vue3-carousel';
+import {Carousel, Slide} from 'vue3-carousel';
+
 const selectedPub = ref<any>(null);
 const carouselConfig = {
   itemsToShow: 1.5,
@@ -19,6 +31,7 @@ const filteredPubs = ref<any[]>([]);
 const loading = ref(true);
 const restType = ref();
 const modal = ref();
+const tip = ref("");
 async function getPubs() {
   try {
     const res = await fetch("https://meurolecarioca.onrender.com/restaurants/pubRating");
@@ -59,20 +72,35 @@ async function sendForm(address:string, radius:number){
       body: JSON.stringify(data)
     });
 
-    if (!response.ok) {
+    if (!response) {
       alert('Erro ao enviar o formulário. Por favor, tente novamente.');
       return;
+    } else if (response.status == 404){
+      alert('Não foram encontrados bares no endereço e raio fornecidos.')
     }
 
     localStorage.setItem('pubs', JSON.stringify(await response.json()));
-    await router.push('/pubsNearby');
+    await router.push('/nightlifeNearby');
 
   } catch (err) {
     console.error("Erro na busca:", err);
     alert('Erro ao buscar bares.');
   } finally {
-    // Sempre esconde o loading no final
     loading.value = false;
+  }
+}
+
+async function selectTips() {
+  try {
+    const res = await fetch('/tips.json');
+    let tipsArray = await res.json();
+    tipsArray = tipsArray.tips;
+    const randomNumber = Math.floor(Math.random() * tipsArray.length);
+    console.log(tipsArray[randomNumber]);
+    return tipsArray[randomNumber];
+  } catch (err) {
+    console.error("Erro ao carregar dicas:", err);
+    return "Aproveite o seu dia!";
   }
 }
 
@@ -87,6 +115,8 @@ function closeModal() {
 
 onMounted(async () => {
   await getPubs();
+  tip.value = await selectTips();
+  console.log(tip);
   // translateType(restaurants.value);
   // filteredRestaurants.value = restaurants.value;
 });
@@ -160,7 +190,17 @@ onMounted(async () => {
             </Slide>
           </Carousel>
 
+          <br>
+
+          <div style="max-width: 60em">
+            <ion-text><h4>Dica</h4></ion-text>
+            <ion-text>{{tip}}</ion-text>
+          </div>
+
+
         </div>
+
+
       </div>
 
 
@@ -179,6 +219,8 @@ onMounted(async () => {
           </div>
         </ion-content>
       </ion-modal>
+
+
     </ion-content>
 
   </ion-page>
