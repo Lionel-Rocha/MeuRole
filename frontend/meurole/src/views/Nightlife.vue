@@ -18,7 +18,8 @@ import router from "@/router";
 import {onMounted, ref} from "vue";
 import 'vue3-carousel/carousel.css';
 import {Carousel, Slide} from 'vue3-carousel';
-
+const address = ref('');
+const radius = ref<number>(5);
 const selectedPub = ref<any>(null);
 const carouselConfig = {
   itemsToShow: 1.5,
@@ -47,46 +48,46 @@ async function getPubs() {
   return filteredPubs;
 }
 
-function searchPubs() {
-  const address = (document.getElementById('address') as HTMLInputElement).value;
-  const radius = (document.getElementById('radius') as HTMLInputElement).value;
 
-  if (address && radius) {
-    let radiusNum = parseInt(radius);
+async function searchPubs() {
+  if (!address.value || !radius.value) {
+    alert('Preencha endereço e raio.');
+    return;
+  }
 
-    // Mostra o loading enquanto busca
-    loading.value = true;
-
-    sendForm(address, radiusNum);
+  loading.value = true;
+  try {
+    await sendForm(address.value, radius.value);
+  } finally {
+    loading.value = false;
   }
 }
 
-async function sendForm(address:string, radius:number){
-  const data = {
-    address: address, radius: radius
-  }
+async function sendForm(addressStr: string, radiusNum: number) {
+  const data = { address: addressStr, radius: radiusNum };
   try {
-    let response = await fetch('https://meurolecarioca.onrender.com/restaurants/pubAddress', {
+    const response = await fetch('https://meurolecarioca.onrender.com/restaurants/pubAddress', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
     });
 
-    if (!response) {
+    if (response.status === 404) {
+      alert('Não foram encontrados bares no endereço e raio fornecidos.');
+      return;
+    }
+    if (!response.ok) {
       alert('Erro ao enviar o formulário. Por favor, tente novamente.');
       return;
-    } else if (response.status == 404){
-      alert('Não foram encontrados bares no endereço e raio fornecidos.')
     }
 
-    localStorage.setItem('pubs', JSON.stringify(await response.json()));
+    const json = await response.json();
+    localStorage.setItem('pubs', JSON.stringify(json));
     await router.push('/nightlifeNearby');
 
   } catch (err) {
     console.error("Erro na busca:", err);
     alert('Erro ao buscar bares.');
-  } finally {
-    loading.value = false;
   }
 }
 
@@ -154,19 +155,18 @@ onMounted(async () => {
 
           <ion-list :inset="true">
             <ion-item>
-              <ion-input id="address" placeholder="bairro/endereço" :clear-input="true" color="dark"></ion-input>
+              <ion-input v-model="address" placeholder="bairro/endereço" :clear-input="true" color="dark"></ion-input>
             </ion-item>
             <ion-item>
               <ion-range
+                  v-model.number="radius"
                   aria-label="raio em km"
                   label="raio em km"
                   :min="1"
                   :max="10"
-                  :value="5"
                   :pin="true"
                   :ticks="true"
                   :snaps="true"
-                  id="radius"
               ></ion-range>
             </ion-item>
 
@@ -192,7 +192,7 @@ onMounted(async () => {
 
           <br>
 
-          <div style="max-width: 60em">
+          <div style="text-align: center; margin-left: auto;">
             <ion-text><h4>Dica</h4></ion-text>
             <ion-text>{{tip}}</ion-text>
           </div>
