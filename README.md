@@ -14,7 +14,7 @@ Chega de pensar muito para sair! Esse serviço (API/aplicação web) planeja seu
 
 ## URLs
 
-**API**: https://meurolecarioca.onrender.com
+**API**: https://meurole-production.up.railway.app/
 
 **SITE**: https://meu-role.vercel.app
 

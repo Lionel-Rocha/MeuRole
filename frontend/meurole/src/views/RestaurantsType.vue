@@ -48,7 +48,7 @@ function translateTypeLabel(t: string) {
 async function getRestaurantsByType() {
   isLoading.value = true;
   try {
-    const res = await fetch("https://meurolecarioca.onrender.com/restaurants/type", {
+    const res = await fetch("https://meurole-production.up.railway.app/restaurants/type", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ type })

@@ -162,7 +162,7 @@ async function sendForm(address:string, radius:number){
     address: address, radius: radius
   }
   try {
-    let response = await fetch('https://meurolecarioca.onrender.com/restaurants', {
+    let response = await fetch('https://meurole-production.up.railway.app/restaurants', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)

@@ -35,7 +35,7 @@ const modal = ref();
 const tip = ref("");
 async function getPubs() {
   try {
-    const res = await fetch("https://meurolecarioca.onrender.com/restaurants/pubRating");
+    const res = await fetch("https://meurole-production.up.railway.app/restaurants/pubRating");
     const data = await res.json();
     pubs.value = data;
     filteredPubs.value = data.filter((r: { rating: number }) => r.rating >= 4.6);

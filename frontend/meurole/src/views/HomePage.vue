@@ -110,7 +110,7 @@ async function sendForm(address:string, radius:number, duration:string, budget:n
   try {
     const data = { address, radius, type: duration, budget };
 
-    let response = await fetch('https://meurolecarioca.onrender.com/outings', {
+    let response = await fetch('https://meurole-production.up.railway.app/outings', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
