@@ -17,7 +17,6 @@
         <div id="container">
           <strong>Qual vai ser seu próximo rolé?</strong>
           <br>
-          <ion-button :disabled="true">surpreenda-me</ion-button>
           <ion-button @click="redirectToRestaurants">restaurantes</ion-button>
           <ion-button @click="redirectToNightlife">vida noturna</ion-button>
           <br>

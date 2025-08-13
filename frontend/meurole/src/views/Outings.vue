@@ -1,8 +1,15 @@
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue'
+import {onMounted, ref} from 'vue'
 import {
-  IonContent, IonHeader, IonPage, IonTitle, IonToolbar,
-  IonCard, IonCardTitle, IonCardSubtitle, IonButton, IonModal
+  IonButton,
+  IonCard,
+  IonCardSubtitle,
+  IonCardTitle,
+  IonContent,
+  IonHeader,
+  IonModal,
+  IonPage,
+  IonToolbar
 } from '@ionic/vue'
 import router from "@/router";
 
@@ -50,6 +57,37 @@ function sortByDistance(items: any[]) {
   })
 }
 
+function getsOutingCoordinates(outing: any){
+  return outing.address;
+}
+
+async function getsRestaurantsNearOuting(outing: any) {
+  let address = getsOutingCoordinates(outing);
+  let data = {address, radius: 2}
+
+  try{
+    let restaurants = await fetch("https://meurole-production.up.railway.app/restaurants", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+    if (!restaurants.ok) {
+      alert('Erro ao enviar o formulário. Por favor, tente novamente.');
+      return;
+    }
+
+    localStorage.setItem('restaurants', JSON.stringify(await restaurants.json()));
+    await router.push('/restaurantsNearby');
+    modal.value.$el.dismiss();
+  } catch (err) {
+    console.error(err);
+    alert('Erro inesperado.');
+  }
+
+
+}
 // Funções que atualizam sortedOutings
 function sortOutingsByPrice() {
   sortedOutings.value = sortByPrice(outings.value);
@@ -147,6 +185,8 @@ onMounted(() => {
               <strong>Preço:</strong> R$ {{ selectedOuting.totalCost.toFixed(2) }}
             </p>
             <p v-else><strong>Preço:</strong> Não disponível</p>
+            <p>Por que não dar uma olhada nos restaurantes próximos?</p>
+            <ion-button @click="getsRestaurantsNearOuting(selectedOuting)">Clique aqui</ion-button>
           </div>
         </ion-content>
       </ion-modal>

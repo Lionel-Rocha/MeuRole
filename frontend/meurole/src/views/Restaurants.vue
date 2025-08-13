@@ -151,8 +151,6 @@ function searchRestaurants() {
     // Mostra o loading enquanto busca
     loading.value = true;
 
-    console.log(address, radiusNum);
-
     sendForm(address, radiusNum);
   }
 }

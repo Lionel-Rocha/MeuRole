@@ -22,7 +22,7 @@ Chega de pensar muito para sair! Esse serviço (API/aplicação web) planeja seu
 
 - [x] Front-end: modal de informações sobre os restaurantes recomendados
 - [x] Front-end: página de busca de bares (vida noturna)
-- [ ] Front-end: restaurantes junto à recomendação de rolé de duração parcial/dia inteiro
+- [x] Front-end: restaurantes junto à recomendação de rolé de duração parcial/dia inteiro
 
 ### v0.2
 
@@ -63,11 +63,11 @@ Recebe opções de passeio no raio desejado no local central exigido.
 }
 ```
 
-**2. Vida noturna (bares/restaurantes) - TO DO**
+**2. Vida noturna (bares)**
 
-*POST /restaurants*
+*POST /restaurants/pubAddress*
 
-Mostra bares e restaurantes próximos ao local desejado, no raio escolhido.
+Mostra bares próximos ao local desejado, no raio escolhido.
 
 ```
 {
@@ -84,7 +84,28 @@ Mostra bares e restaurantes próximos ao local desejado, no raio escolhido.
 }
 ```
 
-**3. Cinemas**
+**3. Restaurantes (por tipo)**
+
+*POST /restaurants*
+
+Mostra restaurantes próximos ao local desejado, no raio escolhido.
+
+```
+{
+"address":"rua/bairro xxx",
+"radius":x
+}
+```
+
+✔️ *EXEMPLO*
+```
+{
+"address:"Centro"
+"radius":5,
+}
+```
+
+**4. Cinemas**
 
 *POST /cinema*
 
