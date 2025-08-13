@@ -55,9 +55,7 @@ async function getByType(type){
 async function getBarsByRating(){
     try{
         const result = await restaurantsdb.getByType('bar');
-        console.log(result);
         let barsByRating = result.sort((a,b) => b.rating - a.rating);
-        console.log(barsByRating);
         return barsByRating || {} ;
     } catch (e){
         throw new Error ('Houve um erro ao retornar os bares por nota: '+ e);

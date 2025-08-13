@@ -23,7 +23,6 @@ Chega de pensar muito para sair! Esse serviço (API/aplicação web) planeja seu
 - [x] Front-end: modal de informações sobre os restaurantes recomendados
 - [x] Front-end: página de busca de bares (vida noturna)
 - [ ] Front-end: restaurantes junto à recomendação de rolé de duração parcial/dia inteiro
-- [ ] Função Surpreenda-me
 
 ### v0.2
 
@@ -33,6 +32,8 @@ Chega de pensar muito para sair! Esse serviço (API/aplicação web) planeja seu
 - [ ] Front-end: refletir mudanças
 - [ ] Front-end: restaurantes - cards de recomendados menores (para computador)
 
+### v0.3
+- [ ] Função Surpreenda-me
 
 ## Como funciona (API)
 É possível "calcular" os rolés por três categorias:
