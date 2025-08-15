@@ -16,7 +16,7 @@ Chega de pensar muito para sair! Esse serviço (API/aplicação web) planeja seu
 
 **API**: https://meurole-production.up.railway.app/
 
-**SITE**: https://meu-role.vercel.app
+**SITE**: https://meurole.up.railway.app/
 
 ## Atualizações futuras
 
