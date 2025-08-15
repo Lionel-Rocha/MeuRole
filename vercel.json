@@ -6,5 +6,5 @@
       "use": "@vercel/static"
     }
   ],
-  "rewrites": [{ "src": "/[^.]+", "dest": "/", "status": 200 }]
+  "rewrites": [{ "source": "/[^.]+", "dest": "/", "status": 200 }]
 }
