@@ -1,7 +1,0 @@
-{
-  "name": "meurole",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "vue-vite"
-}
