@@ -8,5 +8,6 @@
 */
 
 import router from '@adonisjs/core/services/router'
+const RestaurantsController = () => import("../app/controllers/restaurants_controller.ts");
 
-router.on('/').render('pages/home')
+router.post('/', [RestaurantsController, "search"])
