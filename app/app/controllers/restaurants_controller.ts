@@ -1,32 +1,49 @@
 
-import {RestaurantSearchValidator} from "../validators/restaurant.ts";
-import {HttpContext} from "@adonisjs/core/http";
-import {searchRestaurants} from "#services/restaurants";
+import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import RestaurantSearchValidator from '../validators/restaurant.js'
+import { searchAllRestaurants, searchRestaurantsByType } from '../services/restaurants.js'
 
 export default class RestaurantsController {
+   async searchAll({ request, response }: HttpContextContract) {
 
-    async search({ request, response }: HttpContext) {
-        try {
-            const payload = await request.validateUsing(RestaurantSearchValidator)
+     try {
+      const payload = await request.validateUsing(RestaurantSearchValidator)
 
-            const result = await searchRestaurants(
-                payload.address,
-                payload.radius,
-                payload.type
-            )
+      const result = await searchAllRestaurants(payload.address, payload.radius);
 
-            return response.status(200).json(result)
-        } catch (error) {
-            if (error.code === 'E_VALIDATION_ERROR') {
-                return response.status(422).json({
-                    message: "Erro de validação",
-                    errors: error.messages
-                })
-            }
+      return response.ok(result)
+    } catch (error) {
+      if (error.code === 'E_VALIDATION_ERROR') {
+        return response.unprocessableEntity({
+          message: 'Erro de validação',
+          errors: error.messages,
+        })
+      }
 
-            throw error
-        }
+      throw error
     }
+  }
 
+  async searchType({ request, response }: HttpContextContract) {
+    try {
+      const payload = await request.validateUsing(RestaurantSearchValidator)
 
+      const result = await searchRestaurantsByType(
+        payload.address,
+        payload.radius,
+        payload.type
+      )
+
+      return response.ok(result)
+    } catch (error) {
+      if (error.code === 'E_VALIDATION_ERROR') {
+        return response.unprocessableEntity({
+          message: 'Erro de validação',
+          errors: error.messages,
+        })
+      }
+
+      throw error
+    }
+  }
 }

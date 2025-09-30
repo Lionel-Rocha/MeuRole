@@ -1,13 +1,15 @@
-/*
-|--------------------------------------------------------------------------
-| Routes file
-|--------------------------------------------------------------------------
-|
-| The routes file is used for defining the HTTP routes.
-|
-*/
-
 import router from '@adonisjs/core/services/router'
+import NightlivesController from "#controllers/nightlives_controller";
 const RestaurantsController = () => import("../app/controllers/restaurants_controller.ts");
 
-router.post('/', [RestaurantsController, "search"])
+//restaurants: type, all
+
+router.group(() => {
+  router.post('/', [RestaurantsController, 'searchAll'])
+  router.post('/type', [RestaurantsController, 'searchType'])
+}).prefix('/restaurants')
+
+router.post("/nightlife", [NightlivesController, 'searchAll'])
+
+
+

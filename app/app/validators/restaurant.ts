@@ -9,13 +9,14 @@ const RestaurantValidator = vine.object(
   }
 )
 
-
-export const RestaurantSearchValidator = vine.compile(
+const RestaurantSearchValidator = vine.compile(
   vine.object({
     address: vine.string(),
     radius: vine.number(),
-    type: vine.enum(["other","brazilian","vegan","italian","asian","pizza","hamburguer"])
+    type: vine.enum(["other","brazilian","vegan","italian","asian","pizza","hamburguer"]).optional().nullable()
     })
 )
 
 export const RestaurantCreationValidator = vine.compile(RestaurantValidator.clone())
+
+export default RestaurantSearchValidator;
