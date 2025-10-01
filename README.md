@@ -5,35 +5,15 @@ Chega de pensar muito para sair! Esse serviço (API/aplicação web) planeja seu
 
 <div align="center">
 
+<img src="https://img.shields.io/badge/Adonis.js-%23C48AFF?style=flat&logo=adonisjs">
 <img src="https://img.shields.io/badge/Node.js-5FA04E?style=flat&logo=nodedotjs&logoColor=fff">
-<img src="https://img.shields.io/badge/Vue.js-4FC08D?style=flat&logo=vuedotjs&logoColor=fff">
-<img src="https://img.shields.io/badge/Ionic-%233880FF?style=flat&logo=ionic&logoColor=white">
+<!-- <img src="https://img.shields.io/badge/Vue.js-4FC08D?style=flat&logo=vuedotjs&logoColor=fff">
+<img src="https://img.shields.io/badge/Ionic-%233880FF?style=flat&logo=ionic&logoColor=white"> -->
 <img src="https://img.shields.io/badge/Typescript-3d85c6?style=flat&logo=typescript&logoColor=white">
 
 </div>
 
 ## URLs
-
-**API**: https://meurole-production.up.railway.app/
-
-**SITE**: https://meurole.up.railway.app/
-
-## Atualizações futuras
-
-- [x] Front-end: modal de informações sobre os restaurantes recomendados
-- [x] Front-end: página de busca de bares (vida noturna)
-- [x] Front-end: restaurantes junto à recomendação de rolé de duração parcial/dia inteiro
-
-### v0.2
-
-- [ ] Banco de dados: adicionar instagram dos restaurantes
-- [ ] Banco de dados: adicionar foto dos pontos turísticos
-- [ ] Back-end: refletir mudanças
-- [ ] Front-end: refletir mudanças
-- [ ] Front-end: restaurantes - cards de recomendados menores (para computador)
-
-### v0.3
-- [ ] Função Surpreenda-me
 
 ## Como funciona (API)
 É possível "calcular" os rolés por três categorias:
