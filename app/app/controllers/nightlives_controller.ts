@@ -4,7 +4,7 @@ import {searchAllNightlife} from "#services/nightlives";
 
 export default class NightlivesController {
 
-    async searchAll({ request, response }: HttpContextContract){
+    async searchAll({ request, response }: HttpContext){
         try {
             const payload = await request.validateUsing(RestaurantSearchValidator)
 

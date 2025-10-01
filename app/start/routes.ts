@@ -1,8 +1,8 @@
 import router from '@adonisjs/core/services/router'
-import NightlivesController from "#controllers/nightlives_controller";
+const NightlivesController = () => import("../app/controllers/nightlives_controller.ts");
+const OutingsController = () => import("../app/controllers/outings_controller.ts");
 const RestaurantsController = () => import("../app/controllers/restaurants_controller.ts");
 
-//restaurants: type, all
 
 router.group(() => {
   router.post('/', [RestaurantsController, 'searchAll'])
@@ -10,6 +10,8 @@ router.group(() => {
 }).prefix('/restaurants')
 
 router.post("/nightlife", [NightlivesController, 'searchAll'])
+
+router.post("/outings", [OutingsController, 'searchAll'])
 
 
 
