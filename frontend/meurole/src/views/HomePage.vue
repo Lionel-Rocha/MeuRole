@@ -111,7 +111,6 @@ async function sendForm(address:string, radius:number, duration:string, budget:n
 
     let response = await fetch('https://meurole-production.up.railway.app/outings', {
       method: 'POST',
-      mode: 'cors',
       headers: {
         'Content-Type': 'application/json'
       },
