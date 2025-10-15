@@ -107,7 +107,7 @@ async function sendForm(address:string, radius:number, duration:string, budget:n
   loading.value = true; // ativa loading
 
   try {
-    const data = { address, radius, type: duration, budget };
+    const data = { address, radius, duration, budget };
 
     let response = await fetch('https://meurole-production.up.railway.app/outings', {
       method: 'POST',
