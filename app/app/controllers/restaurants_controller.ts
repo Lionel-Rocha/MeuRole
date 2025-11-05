@@ -48,8 +48,8 @@ export default class RestaurantsController {
     }
   }
 
-  async searchRestaurantById({ request, response }: HttpContextContract) {
-       const restaurant = await getRestaurantById(request.params.id);
-        return response.ok(restaurant);
-   }
+  async searchRestaurantById({ request, response, params }: HttpContextContract) {
+       const restaurant = await getRestaurantById(params.id);
+       return response.ok(restaurant);
+  }
 }
