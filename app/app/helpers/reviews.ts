@@ -1,6 +1,5 @@
 import axios from 'axios';
-
-
+import env from '#start/env'
 export async function searchPlaceRequest(config: object) {
     try {
         const response = await axios.request(config);
@@ -34,7 +33,7 @@ export async function getsReviews(name: string){
         maxBodyLength: Infinity,
         url: 'https://google.serper.dev/places',
         headers: {
-            'X-API-KEY': '1ccf902264815eed783f51a1a096993707f7a839',
+            'X-API-KEY': env.get('SERPER-KEY'),
             'Content-Type': 'application/json'
         },
         data : dataFirstRequest
@@ -58,7 +57,7 @@ export async function getsReviews(name: string){
         maxBodyLength: Infinity,
         url: 'https://google.serper.dev/reviews',
         headers: {
-            'X-API-KEY': '1ccf902264815eed783f51a1a096993707f7a839',
+            'X-API-KEY': env.get('SERPER_KEY'),
             'Content-Type': 'application/json'
         },
         data : data
