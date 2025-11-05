@@ -1,7 +1,8 @@
 
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import RestaurantSearchValidator from '../validators/restaurant.js'
-import { searchAllRestaurants, searchRestaurantsByType } from '../services/restaurants.js'
+import {getRestaurantById, searchAllRestaurants, searchRestaurantsByType} from '../services/restaurants.js'
+import Restaurant from "#models/restaurant";
 
 export default class RestaurantsController {
    async searchAll({ request, response }: HttpContextContract) {
@@ -46,4 +47,9 @@ export default class RestaurantsController {
       throw error
     }
   }
+
+  async searchRestaurantById({ request, response }: HttpContextContract) {
+       const restaurant = await getRestaurantById(request.params.id);
+        return response.ok(restaurant);
+   }
 }

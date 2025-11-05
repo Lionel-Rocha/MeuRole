@@ -61,3 +61,9 @@ export async function searchRestaurantsByType(address: string, radius: number, t
   return response;
 
 }
+
+export async function getRestaurantById(id: number){
+    const restaurant = Restaurant.find(id);
+    return restaurant;
+
+}

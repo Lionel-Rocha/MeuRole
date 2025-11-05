@@ -13,5 +13,6 @@ router.post("/nightlife", [NightlivesController, 'searchAll'])
 
 router.post("/outings", [OutingsController, 'searchAll'])
 
+router.get("/restaurant/:id", [RestaurantsController, 'searchRestaurantById'])
 
 
