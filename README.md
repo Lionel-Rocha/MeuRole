@@ -15,6 +15,10 @@ Chega de pensar muito para sair! Esse serviço (API/aplicação web) planeja seu
 
 ## URLs
 
+interface web: https://meurole.up.railway.app
+
+API: https://meurole-production.up.railway.app
+
 ## Como funciona (API)
 É possível "calcular" os rolés por três categorias:
 
