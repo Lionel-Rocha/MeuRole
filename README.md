@@ -20,9 +20,9 @@ Chega de pensar muito para sair! Esse serviço (API/aplicação web) planeja seu
 
 **1. Passeios**
 
-*POST /outing*
+*POST /outings*
 
-Recebe opções de passeio no raio desejado no local central exigido.
+Mostra opções de passeio no raio desejado no local central exigido.
 
 ```
 {
@@ -45,7 +45,7 @@ Recebe opções de passeio no raio desejado no local central exigido.
 
 **2. Vida noturna (bares)**
 
-*POST /restaurants/pubAddress*
+*POST /nightlife*
 
 Mostra bares próximos ao local desejado, no raio escolhido.
 
@@ -66,6 +66,28 @@ Mostra bares próximos ao local desejado, no raio escolhido.
 
 **3. Restaurantes (por tipo)**
 
+*POST /restaurants/type*
+
+Mostra restaurantes próximos ao local desejado, no raio escolhido, nos tipos: "other", "brazilian", "vegan", "italian", "asian", "hamburguer", "pizza".
+
+```
+{
+"address":"rua/bairro xxx",
+"radius":x,
+"type":"enum"
+}
+```
+
+✔️ *EXEMPLO*
+```
+{
+"address:"Centro"
+"radius":5,
+"type":"brazilian"
+}
+```
+**4. Restaurantes (todos)**
+
 *POST /restaurants*
 
 Mostra restaurantes próximos ao local desejado, no raio escolhido.
@@ -81,27 +103,6 @@ Mostra restaurantes próximos ao local desejado, no raio escolhido.
 ```
 {
 "address:"Centro"
-"radius":5,
-}
-```
-
-**4. Cinemas**
-
-*POST /cinema*
-
-Mostra cinemas na área desejada, no raio escolhido.
-
-```
-{
-"address":"rua x",
-"radius":x
-}
-```
-
-✔️ *EXEMPLO*
-```
-{
-"address:"Santa Teresa"
-"radius":7,
+"radius":5
 }
 ```
